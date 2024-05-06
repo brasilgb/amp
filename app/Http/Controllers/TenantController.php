@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class TenantController extends Controller
@@ -22,8 +21,7 @@ class TenantController extends Controller
         $query = Tenant::orderBy('id', 'DESC');
 
         if ($search) {
-            $query->where('descricao', 'like', '%' . $search . '%')
-                ->orWhere('cnpj', 'like', '%' . $search . '%');
+            $query->where('name', 'like', '%' . $search . '%');
         }
 
         $tenants = $query->paginate(12);
@@ -35,8 +33,7 @@ class TenantController extends Controller
      */
     public function create()
     {
-        $tenant = Tenant::exists() ? Tenant::orderBy('id', 'desc')->first()->id : [];
-        return Inertia::render('Tenant/addTenant', ['tenant' => $tenant]);
+        return Inertia::render('Tenant/addTenant');
     }
 
     /**
@@ -47,30 +44,15 @@ class TenantController extends Controller
         $data = $request->all();
 
         $messages = [
-            'required' => 'O campo :attribute deve ser preenchido',
-            'cnpj' => 'CNPJ inválido',
-            'unique' => 'CNPJ já está em uso',
+            'required' => 'O campo :attribute deve ser preenchido'
         ];
         $request->validate(
             [
-                'descricao' => 'required',
-                'endereco' => 'required',
-                'numero' => 'required',
-                'cep' => 'required',
-                'municipio' => 'required',
-                'uf' => 'required',
-                'bairro' => 'required',
-                'cnpj' => 'required|cnpj|unique:tenants',
-                'inscricao' => 'required',
-                'telefone' => 'required',
+                'name' => 'required',
             ],
             $messages,
             [
-                'descricao' => 'descrição',
-                'endereco' => 'endereço',
-                'numero' => 'número',
-                'municipio' => 'município',
-                'inscricao' => 'inscrição',
+                'name' => 'nome',
             ]
         );
 
@@ -104,29 +86,14 @@ class TenantController extends Controller
 
         $messages = [
             'required' => 'O campo :attribute deve ser preenchido',
-            'cnpj' => 'CNPJ inválido',
-            'unique' => 'CNPJ já está em uso',
         ];
         $request->validate(
             [
-                'descricao' => 'required',
-                'endereco' => 'required',
-                'numero' => 'required',
-                'cep' => 'required',
-                'municipio' => 'required',
-                'uf' => 'required',
-                'bairro' => 'required',
-                'cnpj' => ['required', Rule::unique('tenants')->ignore($tenant->id), 'cnpj'],
-                'inscricao' => 'required|inscricao_estadual_rs',
-                'telefone' => 'required',
+                'name' => 'required',
             ],
             $messages,
             [
-                'descricao' => 'descrição',
-                'endereco' => 'endereço',
-                'numero' => 'número',
-                'municipio' => 'município',
-                'inscricao' => 'inscrição',
+                'name' => 'nome',
             ]
         );
         $tenant->update($data);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -19,9 +20,18 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $tenant = Auth::user();
+        // dd(Auth::user());
         $search = $request->get('q');
-
-        $query = User::with('tenant')->orderBy('id', 'DESC');
+        if ($tenant->tenant_id) {
+            if($tenant->roles === 'admin'){
+                $query = User::with('tenant')->where('tenant_id', $tenant->tenant_id)->orderBy('id', 'DESC');
+            }else{
+                $query = User::with('tenant')->where('roles', 'user')->where('tenant_id', $tenant->tenant_id)->orderBy('id', 'DESC');
+            }
+        } else {
+            $query = User::with('tenant')->orderBy('id', 'DESC');
+        }
 
         if ($search) {
             $query->where('name', 'like', '%' . $search . '%');
@@ -37,8 +47,7 @@ class UserController extends Controller
     public function create()
     {
         $tenants = Tenant::get();
-        $users = User::exists() ? User::orderBy('id', 'desc')->first()->id : [];
-        return Inertia::render('User/addUser', ['users' => $users, 'tenants' => $tenants]);
+        return Inertia::render('User/addUser', ['tenants' => $tenants]);
     }
 
     /**
@@ -57,6 +66,7 @@ class UserController extends Controller
         $request->validate(
             [
                 'tenant_id' => 'required',
+                'subsidiary' => 'required',
                 'name' => 'required',
                 'email' => 'required|email|unique:users',
                 'roles' => 'required',
@@ -66,7 +76,8 @@ class UserController extends Controller
             ],
             $messages,
             [
-                'tenant_id' => 'cliente',
+                'tenant_id' => 'empresa',
+                'subsidiary' => 'filial',
                 'name' => 'nome',
                 'password' => 'senha',
                 'password_confirmation' => 'repetir a senha',
@@ -124,7 +135,7 @@ class UserController extends Controller
             ],
             $messages,
             [
-                'tenant_id' => 'cliente',
+                'tenant_id' => 'empresa',
                 'name' => 'nome',
                 'password' => 'senha',
                 'password_confirmation' => 'repetir a senha',

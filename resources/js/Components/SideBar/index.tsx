@@ -1,11 +1,13 @@
 import { Link, usePage } from '@inertiajs/react';
-import { IoCaretForward, IoChevronForward, IoCog, IoHome, IoPeople, IoPerson } from "react-icons/io5";
+import { IoBusiness, IoCaretForward, IoChevronForward, IoCog, IoHome, IoPeople, IoPerson } from "react-icons/io5";
 import React, { useState } from 'react'
 import SideLink from '../SideLink';
 import { LiaCashRegisterSolid } from 'react-icons/lia';
 import { GiReceiveMoney } from 'react-icons/gi';
 import ApplicationLogo from '../ApplicationLogo';
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { IoIosBusiness } from 'react-icons/io';
+import { BiSolidBusiness } from 'react-icons/bi';
 
 const SideBar = () => {
     const { auth } = usePage().props as any;
@@ -14,7 +16,7 @@ const SideBar = () => {
     const [openSide, setOpenSide] = useState(true);
     const [dropdowOpen, setDropdowOpen] = useState(false);
     return (
-        <aside className={`${openSide ? "md:w-72 " : "w-20"} h-full relative bg-sky-800 duration-300 p-5 pt-8 shadow-lg`}>
+        <aside className={`${openSide ? "md:w-72 " : "w-20"} h-full relative bg-[#0C356A] duration-300 p-5 pt-8 shadow-lg`}>
 
             <div onClick={() => setOpenSide(!openSide)} className={`${openSide ? "rotate-180 " : "0"} duration-300 absolute cursor-pointer flex items-center justify-center -right-2 w-7 h-7 rounded-full bg-white top-16 shadow-sm border-2 border-sky-800 text-sky-800 `}>
                 <IoChevronForward />
@@ -39,13 +41,22 @@ const SideBar = () => {
                     label="Dashboard"
                 />
                 {auth?.user?.tenant_id === null &&
-                    <SideLink
-                        url={route('customers.index')}
-                        icon={<IoPeople size={24} />}
-                        openSide={openSide}
-                        active={route().current('customers.index')}
-                        label="Clientes"
-                    />
+                    <>
+                        <SideLink
+                            url={route('customers.index')}
+                            icon={<IoIosBusiness size={24} />}
+                            openSide={openSide}
+                            active={route().current('customers.*')}
+                            label="Empresa principal"
+                        />
+                        <SideLink
+                            url={route('subsidiaries.index')}
+                            icon={<BiSolidBusiness size={24} />}
+                            openSide={openSide}
+                            active={route().current('subsidiaries.*')}
+                            label="Filiais"
+                        />
+                    </>
                 }
 
                 <SideLink
@@ -95,7 +106,7 @@ const SideBar = () => {
                     url={route('users.index')}
                     icon={<IoPerson size={24} />}
                     openSide={openSide}
-                    active={route().current('users.index')}
+                    active={route().current('users.*')}
                     label="Usuários"
                 />
             </ul>

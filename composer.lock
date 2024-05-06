@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7f95c021465928cea14ea614a4f7865",
+    "content-hash": "6ce11ff58aec498d293b1ae41e33ce18",
     "packages": [
         {
             "name": "brick/math",
@@ -134,6 +134,62 @@
                 }
             ],
             "time": "2024-02-09T16:56:22+00:00"
+        },
+        {
+            "name": "crawly/inscricao-estadual-laravel",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crawly/InscricaoEstadualLaravel.git",
+                "reference": "81d615573c9f3b0be21cc423a23425f88ef0cb80"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crawly/InscricaoEstadualLaravel/zipball/81d615573c9f3b0be21cc423a23425f88ef0cb80",
+                "reference": "81d615573c9f3b0be21cc423a23425f88ef0cb80",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2",
+                "thiagocfn/inscricaoestadual": "^1.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "2.17.*",
+                "orchestra/testbench": "4.*",
+                "phpmd/phpmd": "2.8.*",
+                "phpstan/phpstan": "0.12.*",
+                "phpunit/phpunit": "8.5.*",
+                "sebastian/phpcpd": "4.1.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Crawly\\InscricaoEstadualLaravel\\InscricaoEstadualValidatorProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Crawly\\InscricaoEstadualLaravel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Filipe Tagliatti",
+                    "email": "filipetagliatti@gmail.com"
+                }
+            ],
+            "description": "Lib de validação de inscrição estadual no laravel",
+            "support": {
+                "issues": "https://github.com/crawly/InscricaoEstadualLaravel/issues",
+                "source": "https://github.com/crawly/InscricaoEstadualLaravel/tree/1.1.0"
+            },
+            "time": "2021-01-26T20:30:51+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -2074,65 +2130,6 @@
                 }
             ],
             "time": "2024-01-28T23:22:08+00:00"
-        },
-        {
-            "name": "lucascudo/laravel-pt-br-localization",
-            "version": "v2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lucascudo/laravel-pt-BR-localization.git",
-                "reference": "7a282e7f47ed1198ec579832dd8120b82ff5a1ee"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lucascudo/laravel-pt-BR-localization/zipball/7a282e7f47ed1198ec579832dd8120b82ff5a1ee",
-                "reference": "7a282e7f47ed1198ec579832dd8120b82ff5a1ee",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Lucascudo\\LaravelPtBRLocalization\\LaravelPtBRLocalizationServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lucascudo\\LaravelPtBRLocalization\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Cascudo",
-                    "email": "lucas.sisau@gmail.com"
-                }
-            ],
-            "description": "Arquivos de linguagem em Português do Brasil (pt-BR) para Laravel",
-            "homepage": "https://github.com/lucascudo/laravel-pt-br-localization",
-            "support": {
-                "issues": "https://github.com/lucascudo/laravel-pt-BR-localization/issues",
-                "source": "https://github.com/lucascudo/laravel-pt-BR-localization/tree/v2.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://buymeacoffee.com/lucasrocha",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/lucascudo",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/lucascudo/laravel-pt-br-localization",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2024-04-25T11:18:02+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -5899,6 +5896,51 @@
             "time": "2024-04-18T09:29:19+00:00"
         },
         {
+            "name": "thiagocfn/inscricaoestadual",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Thiagocfn/InscricaoEstadual.git",
+                "reference": "414a43f152b9ff39b9cabd33c9bdf34a2018df1b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Thiagocfn/InscricaoEstadual/zipball/414a43f152b9ff39b9cabd33c9bdf34a2018df1b",
+                "reference": "414a43f152b9ff39b9cabd33c9bdf34a2018df1b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.16"
+            },
+            "require-dev": {
+                "codacy/coverage": "dev-master",
+                "phpunit/phpunit": "^5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Thiagocfn\\InscricaoEstadual\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Souza",
+                    "email": "thiagocfn@msn.com"
+                }
+            ],
+            "description": "Biblioteca em PHP para validação de todas as Inscrições Estaduais de todo o Brasil, seguindo as regras da SEFAZ. http://www.sintegra.gov.br/insc_est.html",
+            "homepage": "https://github.com/thiagocfn/inscricaoestadual",
+            "support": {
+                "issues": "https://github.com/Thiagocfn/InscricaoEstadual/issues",
+                "source": "https://github.com/Thiagocfn/InscricaoEstadual/tree/1.1.2"
+            },
+            "time": "2021-03-12T00:57:51+00:00"
+        },
+        {
             "name": "tightenco/ziggy",
             "version": "v2.1.0",
             "source": {
@@ -6610,6 +6652,65 @@
                 "source": "https://github.com/laravel/sail"
             },
             "time": "2024-03-20T20:09:31+00:00"
+        },
+        {
+            "name": "lucascudo/laravel-pt-br-localization",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lucascudo/laravel-pt-BR-localization.git",
+                "reference": "7a282e7f47ed1198ec579832dd8120b82ff5a1ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lucascudo/laravel-pt-BR-localization/zipball/7a282e7f47ed1198ec579832dd8120b82ff5a1ee",
+                "reference": "7a282e7f47ed1198ec579832dd8120b82ff5a1ee",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Lucascudo\\LaravelPtBRLocalization\\LaravelPtBRLocalizationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lucascudo\\LaravelPtBRLocalization\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Cascudo",
+                    "email": "lucas.sisau@gmail.com"
+                }
+            ],
+            "description": "Arquivos de linguagem em Português do Brasil (pt-BR) para Laravel",
+            "homepage": "https://github.com/lucascudo/laravel-pt-br-localization",
+            "support": {
+                "issues": "https://github.com/lucascudo/laravel-pt-BR-localization/issues",
+                "source": "https://github.com/lucascudo/laravel-pt-BR-localization/tree/v2.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://buymeacoffee.com/lucasrocha",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/lucascudo",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/lucascudo/laravel-pt-br-localization",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-04-25T11:18:02+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -8379,16 +8480,16 @@
         },
         {
             "name": "spatie/flare-client-php",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/flare-client-php.git",
-                "reference": "9aa60f6ded35a774554e7a5256dca12b72693b78"
+                "reference": "e27977d534eefe04c154c6fd8460217024054c05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/9aa60f6ded35a774554e7a5256dca12b72693b78",
-                "reference": "9aa60f6ded35a774554e7a5256dca12b72693b78",
+                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/e27977d534eefe04c154c6fd8460217024054c05",
+                "reference": "e27977d534eefe04c154c6fd8460217024054c05",
                 "shasum": ""
             },
             "require": {
@@ -8436,7 +8537,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/flare-client-php/issues",
-                "source": "https://github.com/spatie/flare-client-php/tree/1.5.0"
+                "source": "https://github.com/spatie/flare-client-php/tree/1.5.1"
             },
             "funding": [
                 {
@@ -8444,20 +8545,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-02T13:18:42+00:00"
+            "time": "2024-05-03T15:43:14+00:00"
         },
         {
             "name": "spatie/ignition",
-            "version": "1.14.0",
+            "version": "1.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ignition.git",
-                "reference": "80385994caed328f6f9c9952926932e65b9b774c"
+                "reference": "c23cc018c5f423d2f413b99f84655fceb6549811"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ignition/zipball/80385994caed328f6f9c9952926932e65b9b774c",
-                "reference": "80385994caed328f6f9c9952926932e65b9b774c",
+                "url": "https://api.github.com/repos/spatie/ignition/zipball/c23cc018c5f423d2f413b99f84655fceb6549811",
+                "reference": "c23cc018c5f423d2f413b99f84655fceb6549811",
                 "shasum": ""
             },
             "require": {
@@ -8527,7 +8628,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-26T08:45:51+00:00"
+            "time": "2024-05-03T15:56:16+00:00"
         },
         {
             "name": "spatie/laravel-ignition",

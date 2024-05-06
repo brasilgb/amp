@@ -1,4 +1,4 @@
-import { AddButton, AgendaClienteButton, DeleteButton, EditButton, OrderButton } from "@/Components/Buttons"
+import { AddButton, DeleteButton, EditButton } from "@/Components/Buttons"
 import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderContent } from "@/Components/Card"
 import FlashMessage from "@/Components/FlashMessage"
 import InputSearch from "@/Components/InputSearch"
@@ -14,7 +14,7 @@ import { IoPeopleSharp } from "react-icons/io5"
 
 type Props = {}
 
-const Tenant = ({ tenants }: any) => {
+const Subsidiary = ({ subsidiaries }: any) => {
     const { flash } = usePage().props;
 
     return (
@@ -25,22 +25,22 @@ const Tenant = ({ tenants }: any) => {
                     <HeaderContent>
                         <TitleTop>
                             <IoPeopleSharp size={30} />
-                            <span className="ml-2">Clientes</span>
+                            <span className="ml-2">Filiais</span>
                         </TitleTop>
-                        <BreadCrumbTop links={[{ url: null, label: "Clientes" }]} />
+                        <BreadCrumbTop links={[{ url: null, label: "Filiais" }]} />
                     </HeaderContent>
                     <CardContainer>
                         <CardHeader>
                             <CardHeaderContent>
                                 <InputSearch
-                                    placeholder={"Buscar por nome"}
-                                    url={"customers.index"}
+                                    placeholder={"Buscar por descrição ou cnpj"}
+                                    url={"subsidiaries.index"}
                                 />
                             </CardHeaderContent>
                             <CardHeaderContent>
                                 <AddButton
-                                    url={route('customers.create')}
-                                    label={"Cliente"}
+                                    url={route('subsidiaries.create')}
+                                    label={"Filial"}
                                 />
                             </CardHeaderContent>
                         </CardHeader>
@@ -50,35 +50,55 @@ const Tenant = ({ tenants }: any) => {
                                 <TableHeader>
                                     <TableRow>
                                         <TableHead>#</TableHead>
-                                        <TableHead>Nome</TableHead>
+                                        <TableHead>Empresa</TableHead>
+                                        <TableHead>Nº Filial</TableHead>
+                                        <TableHead>Filial</TableHead>
+                                        <TableHead>CNPJ</TableHead>
+                                        <TableHead>Insc. estadual</TableHead>
+                                        <TableHead>Telefone</TableHead>
                                         <TableHead>Cadastro</TableHead>
                                         <TableHead></TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {tenants.data.map((cliente: any) => (
-                                        <Fragment key={cliente.id}>
+                                    {subsidiaries.data.map((subsidiary: any) => (
+                                        <Fragment key={subsidiary.id}>
                                             <TableRow>
-                                                <TableCell>{cliente.id}</TableCell>
+                                                <TableCell>{subsidiary.id}</TableCell>
                                                 <TableCell>
-                                                    {cliente.name}
+                                                    {subsidiary.tenant.name}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {subsidiary.subnumber}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {subsidiary.subname}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {maskCnpj(subsidiary.cnpj)}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {maskInscEstadual(subsidiary.statereg)}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {subsidiary.telephone}
                                                 </TableCell>
                                                 <TableCell>
                                                     {moment(
-                                                        cliente.created_at,
+                                                        subsidiary.created_at,
                                                     ).format("DD/MM/YYYY")}
                                                 </TableCell>
                                                 <TableCell className="flex items-center justify-end gap-2">
                                                     <EditButton
                                                         url={route(
-                                                            "customers.edit",
-                                                            cliente.id,
+                                                            "subsidiaries.edit",
+                                                            subsidiary.id,
                                                         )}
                                                     />
                                                     <DeleteButton
-                                                        url="customers.destroy"
-                                                        param={cliente.id}
-                                                        identify={`o cliente ${cliente.descricao}`}
+                                                        url="subsidiaries.destroy"
+                                                        param={subsidiary.id}
+                                                        identify={`o subsidiary ${subsidiary.subname}`}
                                                     />
                                                 </TableCell>
                                             </TableRow>
@@ -88,7 +108,7 @@ const Tenant = ({ tenants }: any) => {
                             </Table>
                         </CardBody>
                         <CardFooter>
-                            <Pagination data={tenants} />
+                            <Pagination data={subsidiaries} />
                         </CardFooter>
                     </CardContainer>
                 </Card>
@@ -97,4 +117,4 @@ const Tenant = ({ tenants }: any) => {
     )
 }
 
-export default Tenant
+export default Subsidiary

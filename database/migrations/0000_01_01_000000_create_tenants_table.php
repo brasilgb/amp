@@ -16,21 +16,10 @@ class CreateTenantsTable extends Migration
     public function up(): void
     {
         Schema::create('tenants', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->string('descricao', 50);
-            $table->string('endereco', 80);
-            $table->integer('numero');
-            $table->string('cep', 20);
-            $table->string('municipio', 50);
-            $table->string('uf', 20);
-            $table->string('bairro', 50);
-            $table->string('cnpj', 50);
-            $table->string('inscricao', 50);
-            $table->string('telefone', 20);
-            $table->string('whatsapp', 20)->nullable();
-            $table->text('obs')->nullable();
-            $table->timestamps();
-            $table->json('data')->nullable();
+            $table->id();
+            $table->string('name', 50);
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

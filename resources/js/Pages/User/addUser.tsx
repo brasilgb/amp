@@ -3,19 +3,20 @@ import { Card, CardBody, CardContainer, CardFooter, CardHeader, CardHeaderConten
 import { BreadCrumbTop, HeaderContent, TitleTop } from '@/Components/PageTop'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import { roleUser, statusUser } from "@/Utils/dataSelect"
-import { maskCep, maskCpfCnpj, maskInscEstadual, maskPhone, unMask } from '@/Utils/mask'
-import { Head, useForm } from '@inertiajs/react'
+import { Head, useForm, usePage } from '@inertiajs/react'
 import { useEffect, useState } from "react"
 import { IoEye, IoEyeOff, IoPeopleSharp } from 'react-icons/io5'
 
 const addUser = (tenants: any) => {
+  const { auth } = usePage().props as any;
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const [filterSearch, setFilterSearch] = useState<any>([]);
+  const tanantsNow = tenants?.tenants?.filter((ft:any) => (ft.id === auth.user.tenant_id)).map((t:any) => ({"id": t.id, "descricao": t.descricao}))
 
   const { data, setData, post, processing, errors } = useForm({
-    tenant_id: "",
-    cliente: "",
+    tenant_id: auth.user.tenant_id === null ? "" : tanantsNow[0].id,
+    cliente: auth.user.tenant_id === null ? "" : tanantsNow[0].name,
     name: "",
     email: "",
     password: "",
@@ -31,7 +32,7 @@ const addUser = (tenants: any) => {
 
   const handleSearch = (value: any) => {
     const client = value.toLowerCase();
-    const result = tenants?.tenants?.filter((cl: any) => (cl.descricao.toLowerCase().includes(client)));
+    const result = tenants?.tenants?.filter((cl: any) => (cl.name.toLowerCase().includes(client)));
     setFilterSearch(result);
   };
 
@@ -46,7 +47,6 @@ const addUser = (tenants: any) => {
     setData((data) => ({ ...data, tenant_id: id }));
     setData((data) => ({ ...data, cliente: nome }));
     setFilterSearch([]);
-
   };
 
   return (
@@ -110,6 +110,7 @@ const addUser = (tenants: any) => {
                           handleSearch(e.target.value)
                         }}
                         className="input-form"
+                        readOnly={auth.user.tenant_id === null ? false : true}
                       />
                       {filterSearch.length > 0 &&
                         <div className="absolute z-20 bg-gray-50 border-2 border-white shadow-md w-full rounded-sm top-16 max-h-52 overflow-y-auto">
@@ -118,9 +119,9 @@ const addUser = (tenants: any) => {
                               <li key={idx} className={`flex items-center justify-normal ${idx < (filterSearch.length - 1) ? 'border-b border-gray-200' : ''}`}>
                                 <div
                                   className="text-sm text-gray-600 p-1 cursor-pointer inline-block w-full"
-                                  onClick={() => handleChangeCustomer(tenant.id, tenant.descricao)}
+                                  onClick={() => handleChangeCustomer(tenant.id, tenant.name)}
                                 >
-                                  {tenant.descricao}
+                                  {tenant.name}
                                 </div>
                               </li>
                             ))}

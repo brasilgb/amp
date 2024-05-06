@@ -1,12 +1,11 @@
 const roleUser = [
-    { value: 1, label: "Administrador" },
-    { value: 2, label: "Usuário" },
-    { value: 3, label: "Técnico" },
+    { value: "admin", label: "Administrador" },
+    { value: "user", label: "Usuário" },
 ];
 
 const statusUser = [
-    { value: 1, label: "Ativo" },
-    { value: 2, label: "Inativo" },
+    { value: "active", label: "Ativo" },
+    { value: "inactive", label: "Inativo" },
 ];
 
 export {

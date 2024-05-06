@@ -63,7 +63,7 @@ const User = ({ users }: any) => {
                                             <TableRow>
                                                 <TableCell>{user?.id}</TableCell>
                                                 <TableCell>
-                                                    {user?.tenant?.descricao}
+                                                    {user?.tenant?.name}
                                                 </TableCell>
                                                 <TableCell>
                                                     {user?.name}
