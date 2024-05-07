@@ -11,8 +11,6 @@ import { BiSolidBusiness } from 'react-icons/bi';
 
 const SideBar = () => {
     const { auth } = usePage().props as any;
-    console.log(auth?.user?.tenant_id);
-
     const [openSide, setOpenSide] = useState(true);
     const [dropdowOpen, setDropdowOpen] = useState(false);
     return (

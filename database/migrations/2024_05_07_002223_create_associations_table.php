@@ -11,14 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('metas', function (Blueprint $table) {
+        Schema::create('associations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tenant_id')->nullable()->constrained();
-            $table->string("cnpj");
-            $table->string("filial");
-            $table->string("anomes");
-            $table->string("valormeta");
-            $table->string("metajuros");
+            $table->string('cnpj');
+            $table->string('filial');
+            $table->string('dtvenda');
+            $table->string('assoc');
+            $table->string('descassoc');
+            $table->string('valdevolucao');
+            $table->string('valvenda');
+            $table->string('margem');
+            $table->string('representa');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('metas');
+        Schema::dropIfExists('associations');
     }
 };

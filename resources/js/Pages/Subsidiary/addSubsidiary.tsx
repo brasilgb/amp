@@ -7,7 +7,8 @@ import { Head, useForm, usePage } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
 import { IoPeopleSharp } from 'react-icons/io5'
 
-const AddSubsidiary = (tenants: any) => {
+const AddSubsidiary = ({tenants}: any) => {
+ 
   const { auth } = usePage().props as any;
   const [filterSearch, setFilterSearch] = useState<any>([]);
   const { data, setData, post, progress, processing, errors } = useForm({
@@ -32,9 +33,10 @@ const AddSubsidiary = (tenants: any) => {
     e.preventDefault();
     post(route("subsidiaries.store"));
   }
+  
   const handleSearch = (value: any) => {
     const client = value.toLowerCase();
-    const result = tenants?.tenants?.filter((cl: any) => (cl.name.toLowerCase().includes(client)));
+    const result = tenants?.filter((cl: any) => (cl.name.toLowerCase().includes(client)));
     setFilterSearch(result);
   };
 
@@ -125,10 +127,10 @@ const AddSubsidiary = (tenants: any) => {
                         className="input-form"
                         readOnly={auth.user.tenant_id === null ? false : true}
                       />
-                      {filterSearch.length > 0 &&
+                      {filterSearch?.length > 0 &&
                         <div className="absolute z-20 bg-gray-50 border-2 border-white shadow-md w-full rounded-sm top-16 max-h-52 overflow-y-auto">
                           <ul className="p-1">
-                            {filterSearch.map((tenant: any, idx: number) => (
+                            {filterSearch?.map((tenant: any, idx: number) => (
                               <li key={idx} className={`flex items-center justify-normal ${idx < (filterSearch.length - 1) ? 'border-b border-gray-200' : ''}`}>
                                 <div
                                   className="text-sm text-gray-600 p-1 cursor-pointer inline-block w-full"

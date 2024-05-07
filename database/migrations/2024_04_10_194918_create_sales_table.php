@@ -13,11 +13,14 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tenant_id')->nullable()->constrained();
-            $table->string('faturamento');
-            $table->string('meta');
-            $table->string('repfat');
+            $table->string('cnpj');
+            $table->string('filial');
+            $table->string('descfilial');
+            $table->string('dtvenda');
+            $table->string('valdevolucao');
+            $table->string('valvenda');
             $table->string('margem');
-            $table->dateTime('dtfat');
+            $table->string('representa');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

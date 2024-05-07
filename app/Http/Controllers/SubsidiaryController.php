@@ -36,9 +36,8 @@ class SubsidiaryController extends Controller
      */
     public function create()
     {
-        $subsidiaries = Tenant::get();
-
-        return Inertia::render('Subsidiary/addSubsidiary', ['subsidiaries' => $subsidiaries]);
+        $tenants = Tenant::get();
+        return Inertia::render('Subsidiary/addSubsidiary', ['tenants' => $tenants]);
     }
 
     /**
